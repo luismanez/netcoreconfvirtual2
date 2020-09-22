@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Delos.Westworld.Domain\Delos.Westworld.Domain.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFrameworks>$(NetStandardMultiTarget)</TargetFrameworks>
+  </PropertyGroup>
+
+</Project>

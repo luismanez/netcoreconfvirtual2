@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Delos.Westworld.Infrastructure\Delos.Westworld.Infrastructure.csproj" />
+    <ProjectReference Include="..\Delos.Westworld.Domain\Delos.Westworld.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+        <PackageReference Include="Microsoft.Identity.Web" />
+        <PackageReference Include="Microsoft.Identity.Web.UI" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+</Project>
