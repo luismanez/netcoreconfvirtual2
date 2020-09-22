@@ -1,6 +1,6 @@
 using System;
 
-namespace Delos.Westworld.EnrollmentsApi
+namespace Delos.Westworld.EngineeringApi
 {
     public class WeatherForecast
     {

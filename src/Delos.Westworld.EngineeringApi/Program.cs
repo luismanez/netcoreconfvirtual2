@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Delos.Westworld.EnrollmentsApi
+namespace Delos.Westworld.EngineeringApi
 {
     public class Program
     {

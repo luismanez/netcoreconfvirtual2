@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{78523D5B-728A-4626-86B1-03CAF613EE0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delos.Westworld.Domain", "src\Delos.Westworld.Domain\Delos.Westworld.Domain.csproj", "{DFA08803-96FF-430C-9E1D-7EEF94CCFBB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delos.Westworld.Domain", "src\Delos.Westworld.Domain\Delos.Westworld.Domain.csproj", "{DFA08803-96FF-430C-9E1D-7EEF94CCFBB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delos.Westworld.ParksApi", "src\Delos.Westworld.ParksApi\Delos.Westworld.ParksApi.csproj", "{9DC27043-C814-4B0E-A85D-0B4C2C96A9EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delos.Westworld.ParksApi", "src\Delos.Westworld.ParksApi\Delos.Westworld.ParksApi.csproj", "{9DC27043-C814-4B0E-A85D-0B4C2C96A9EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delos.Westworld.EnrollmentsApi", "src\Delos.Westworld.EnrollmentsApi\Delos.Westworld.EnrollmentsApi.csproj", "{132B1B3E-35A6-4E45-A85A-C4CF5F475FFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delos.Westworld.EngineeringApi", "src\Delos.Westworld.EngineeringApi\Delos.Westworld.EngineeringApi.csproj", "{132B1B3E-35A6-4E45-A85A-C4CF5F475FFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delos.Westworld.Infrastructure", "src\Delos.Westworld.Infrastructure\Delos.Westworld.Infrastructure.csproj", "{57A1814B-EF24-4005-BCDE-5C2B732CCD63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delos.Westworld.Infrastructure", "src\Delos.Westworld.Infrastructure\Delos.Westworld.Infrastructure.csproj", "{57A1814B-EF24-4005-BCDE-5C2B732CCD63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delos.Westworld.Website", "src\Delos.Westworld.Website\Delos.Westworld.Website.csproj", "{E5DFD437-12EE-4B6A-9C75-E854EE7ECE76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delos.Westworld.Website", "src\Delos.Westworld.Website\Delos.Westworld.Website.csproj", "{E5DFD437-12EE-4B6A-9C75-E854EE7ECE76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFA08803-96FF-430C-9E1D-7EEF94CCFBB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -89,11 +86,17 @@ Global
 		{E5DFD437-12EE-4B6A-9C75-E854EE7ECE76}.Release|x86.ActiveCfg = Release|Any CPU
 		{E5DFD437-12EE-4B6A-9C75-E854EE7ECE76}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DFA08803-96FF-430C-9E1D-7EEF94CCFBB7} = {78523D5B-728A-4626-86B1-03CAF613EE0C}
 		{9DC27043-C814-4B0E-A85D-0B4C2C96A9EA} = {78523D5B-728A-4626-86B1-03CAF613EE0C}
 		{132B1B3E-35A6-4E45-A85A-C4CF5F475FFD} = {78523D5B-728A-4626-86B1-03CAF613EE0C}
 		{57A1814B-EF24-4005-BCDE-5C2B732CCD63} = {78523D5B-728A-4626-86B1-03CAF613EE0C}
 		{E5DFD437-12EE-4B6A-9C75-E854EE7ECE76} = {78523D5B-728A-4626-86B1-03CAF613EE0C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A888A011-E239-4488-B6C4-6112929D1B72}
 	EndGlobalSection
 EndGlobal

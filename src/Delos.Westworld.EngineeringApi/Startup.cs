@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Delos.Westworld.EnrollmentsApi
+namespace Delos.Westworld.EngineeringApi
 {
     public class Startup
     {

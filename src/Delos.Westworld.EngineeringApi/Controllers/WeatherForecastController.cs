@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Delos.Westworld.EnrollmentsApi.Controllers
+namespace Delos.Westworld.EngineeringApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
