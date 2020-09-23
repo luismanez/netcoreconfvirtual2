@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Delos.Westworld.Website.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +39,16 @@ namespace Delos.Westworld.Website
             });
 
             services.AddOptions();
+
+            services.AddHttpClient<IParksApiClient, ParksApiClient>(client => {
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                client.BaseAddress = new Uri("https://localhost:44313");
+            });
+
+            services.AddHttpClient<IEngineeringApiClient, EngineeringApiClient>(client => {
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                client.BaseAddress = new Uri("https://localhost:44309");
+            });
 
             services.AddMicrosoftIdentityWebAppAuthentication(Configuration);
 

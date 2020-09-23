@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Delos.Westworld.Domain.Repositories;
+using Delos.Westworld.Infrastructure.Persistence;
+using Delos.Westworld.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +28,10 @@ namespace Delos.Westworld.EngineeringApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddPersistence(Configuration.GetConnectionString("WestworldDbContext"));
+
+            services.AddScoped<IHostOperationRepository, HostOperationRepository>();
+
             services.AddControllers();
         }
 

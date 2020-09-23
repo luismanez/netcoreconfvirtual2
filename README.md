@@ -3,3 +3,11 @@ Materials from my session [__Azure AD MFA + Conditional Acess for Developers__](
 
 ## Deploy
 Update AppSettings.json with your Azure AD Apps values (ClientId, Secret...)
+
+## EF Core migrations cheatsheet
+
+__Add Migration__
+dotnet ef migrations add InitialCreate --project  ./src/Delos.Westworld.Infrastructure --startup-project ./src/Delos.Westworld.EngineeringApi
+
+__Update Database__
+dotnet ef database update --project  ./src/Delos.Westworld.Infrastructure --startup-project ./src/Delos.Westworld.EngineeringApi

@@ -1,8 +1,24 @@
-﻿@{
+﻿@using Delos.Westworld.Domain
+@model IEnumerable<Park>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <h5 class="section-title h1">Welcome To Delos Parks</h5>
+    <div class="row">
+    @foreach (Park p in Model)
+    {
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="https://e00-expansion.uecdn.es/blogs/mcgufilms/imagenes_posts/2016/12/05/176899.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.Name</h5>
+                    <p class="card-text">@p.Description</p>
+                    <a href="#" class="btn btn-primary">View Park</a>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
 </div>

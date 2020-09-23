@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Delos.Westworld.Website.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Delos.Westworld.Website.Models;
@@ -12,15 +13,20 @@ namespace Delos.Westworld.Website.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IParksApiClient _parksApiClient;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, 
+            IParksApiClient parksApiClient)
         {
             _logger = logger;
+            _parksApiClient = parksApiClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var parks = await _parksApiClient.GetParks();
+
+            return View(parks);
         }
 
         public IActionResult Privacy()
