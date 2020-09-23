@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Delos.Westworld.Domain;
 using Delos.Westworld.Infrastructure.Extensions;
+using Microsoft.Identity.Web;
 
 namespace Delos.Westworld.Website.Http
 {
@@ -13,19 +15,25 @@ namespace Delos.Westworld.Website.Http
         Task<Park> GetPark(Guid id);
         Task<IEnumerable<Host>> GetHostsInPark(Guid id);
         Task<Host> GetHost(Guid id);
+        Task<Host> RepairHost(Guid id);
     }
 
     public class ParksApiClient: IParksApiClient
     {
         private readonly HttpClient _httpClient;
+        private readonly ITokenAcquisition _tokenAcquisition;
 
-        public ParksApiClient(HttpClient httpClient)
+        public ParksApiClient(HttpClient httpClient, 
+            ITokenAcquisition tokenAcquisition)
         {
             _httpClient = httpClient;
+            _tokenAcquisition = tokenAcquisition;
         }
 
         public async Task<IEnumerable<Park>> GetParks()
         {
+            await SetBearerTokenForParksApi();
+
             var response = await _httpClient.GetAsync("api/parks");
             response.EnsureSuccessStatusCode();
             
@@ -36,6 +44,8 @@ namespace Delos.Westworld.Website.Http
 
         public async Task<Park> GetPark(Guid id)
         {
+            await SetBearerTokenForParksApi();
+
             var response = await _httpClient.GetAsync($"api/parks/{id}");
             response.EnsureSuccessStatusCode();
 
@@ -46,6 +56,8 @@ namespace Delos.Westworld.Website.Http
 
         public async Task<IEnumerable<Host>> GetHostsInPark(Guid id)
         {
+            await SetBearerTokenForParksApi();
+
             var response = await _httpClient.GetAsync($"api/parks/{id}/hosts");
             response.EnsureSuccessStatusCode();
 
@@ -56,12 +68,33 @@ namespace Delos.Westworld.Website.Http
 
         public async Task<Host> GetHost(Guid id)
         {
+            await SetBearerTokenForParksApi();
+
             var response = await _httpClient.GetAsync($"api/hosts/{id}");
             response.EnsureSuccessStatusCode();
 
             var host = await response.Content.ReadAs<Host>();
 
             return host;
+        }
+
+        public async Task<Host> RepairHost(Guid id)
+        {
+            await SetBearerTokenForParksApi();
+
+            var response = await _httpClient.GetAsync($"api/hosts/{id}/repair");
+            response.EnsureSuccessStatusCode();
+
+            var host = await response.Content.ReadAs<Host>();
+
+            return host;
+        }
+
+        private async Task SetBearerTokenForParksApi()
+        {
+            var token = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { "api://42146f37-5fe8-4734-9673-b4e07344f597/.default" });
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
         }
     }
 }

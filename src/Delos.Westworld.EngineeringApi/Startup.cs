@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Web;
 
 namespace Delos.Westworld.EngineeringApi
 {
@@ -29,6 +30,8 @@ namespace Delos.Westworld.EngineeringApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddPersistence(Configuration.GetConnectionString("WestworldDbContext"));
+
+            services.AddMicrosoftIdentityWebAppAuthentication(Configuration);
 
             services.AddScoped<IHostOperationRepository, HostOperationRepository>();
 

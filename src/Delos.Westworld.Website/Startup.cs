@@ -45,12 +45,9 @@ namespace Delos.Westworld.Website
                 client.BaseAddress = new Uri("https://localhost:44313");
             });
 
-            services.AddHttpClient<IEngineeringApiClient, EngineeringApiClient>(client => {
-                client.DefaultRequestHeaders.Add("Accept", "application/json");
-                client.BaseAddress = new Uri("https://localhost:44309");
-            });
-
-            services.AddMicrosoftIdentityWebAppAuthentication(Configuration);
+            services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
+                .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddInMemoryTokenCaches();
 
             services.AddControllersWithViews(options =>
             {
