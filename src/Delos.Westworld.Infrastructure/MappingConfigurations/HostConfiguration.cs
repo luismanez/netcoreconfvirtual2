@@ -20,7 +20,8 @@ namespace Delos.Westworld.Infrastructure.MappingConfigurations
                     Id = Guid.Parse("53205ba8-c39a-4fc9-ab19-79cfe43a5de9"),
                     DateOfCreation = DateTime.Today.AddDays(-50),
                     LastSystemReview = DateTime.Today.AddDays(-12),
-                    Name = "Dolores Abernathy"
+                    Name = "Dolores Abernathy",
+                    PictureUrl = "https://vignette.wikia.nocookie.net/westworld/images/b/bc/Westworld-episode-5_Dolores_infobox.jpg/revision/latest/top-crop/width/200/height/150?cb=20161031210817"
                 },
                 new Host
                 {
@@ -29,7 +30,8 @@ namespace Delos.Westworld.Infrastructure.MappingConfigurations
                     Id = Guid.Parse("20f75515-cd6b-4635-88c4-03abe4a4ebf8"),
                     DateOfCreation = DateTime.Today.AddDays(-150),
                     LastSystemReview = DateTime.Today.AddDays(-19),
-                    Name = "Bernard Lowe"
+                    Name = "Bernard Lowe",
+                    PictureUrl = "https://vignette.wikia.nocookie.net/westworld/images/4/43/Bernard_Lowe_Season_3.jpg/revision/latest?cb=20200307120558"
                 },
                 new Host
                 {
@@ -38,7 +40,8 @@ namespace Delos.Westworld.Infrastructure.MappingConfigurations
                     Id = Guid.Parse("ba2608b9-23c8-4d71-a51c-6c3c9b07dfc6"),
                     DateOfCreation = DateTime.Today.AddDays(-50),
                     LastSystemReview = DateTime.Today.AddDays(-9),
-                    Name = "Clementine Pennyfeather"
+                    Name = "Clementine Pennyfeather",
+                    PictureUrl = "https://vignette.wikia.nocookie.net/westworld/images/8/8b/Clementine_Pennyfeather.jpg/revision/latest?cb=20161104230847"
                 }
             });
 
@@ -52,7 +55,8 @@ namespace Delos.Westworld.Infrastructure.MappingConfigurations
                     Id = Guid.Parse("6868b126-84ff-4d92-9220-fd05a76c140a"),
                     DateOfCreation = DateTime.Today.AddDays(-20),
                     LastSystemReview = DateTime.Today.AddDays(-2),
-                    Name = "Akane"
+                    Name = "Akane",
+                    PictureUrl = "https://vignette.wikia.nocookie.net/westworld/images/f/f3/Akane.jpg/revision/latest/scale-to-width-down/620?cb=20180520132523"
                 },
                 new Host
                 {
@@ -61,7 +65,8 @@ namespace Delos.Westworld.Infrastructure.MappingConfigurations
                     Id = Guid.Parse("e734bab8-c0aa-41c7-b01c-a77b3fc20acf"),
                     DateOfCreation = DateTime.Today.AddDays(-10),
                     LastSystemReview = DateTime.Today.AddDays(-9),
-                    Name = "Musashi"
+                    Name = "Musashi",
+                    PictureUrl = "https://vignette.wikia.nocookie.net/westworld/images/6/6b/Musashi_Akane_No_Mai.jpg/revision/latest?cb=20180520131337"
                 }
             });
 
@@ -75,7 +80,8 @@ namespace Delos.Westworld.Infrastructure.MappingConfigurations
                     Id = Guid.Parse("a77d4f82-8045-4b03-9e89-ec595fbfe8c0"),
                     DateOfCreation = DateTime.Today.AddDays(-123),
                     LastSystemReview = DateTime.Today.AddDays(-20),
-                    Name = "Maeve Millay"
+                    Name = "Maeve Millay",
+                    PictureUrl = "https://vignette.wikia.nocookie.net/westworld/images/7/78/Maeves1.jpeg/revision/latest/top-crop/width/200/height/150?cb=20200506155237"
                 },
                 new Host
                 {
@@ -84,7 +90,8 @@ namespace Delos.Westworld.Infrastructure.MappingConfigurations
                     Id = Guid.Parse("2f71f976-db4d-4cc4-8bc5-2726d299ef9e"),
                     DateOfCreation = DateTime.Today.AddDays(-600),
                     LastSystemReview = DateTime.Today.AddDays(-90),
-                    Name = "Hector Escaton"
+                    Name = "Hector Escaton",
+                    PictureUrl = "https://vignette.wikia.nocookie.net/westworld/images/b/b3/Hector_Escaton_infobox_new.jpg/revision/latest?cb=20161024002853"
                 }
             });
         }

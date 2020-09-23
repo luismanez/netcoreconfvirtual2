@@ -29,6 +29,15 @@ namespace Delos.Westworld.Website.Controllers
             return View(parks);
         }
 
+        public async Task<IActionResult> Park(Guid id)
+        {
+            var park = await _parksApiClient.GetPark(id);
+            var hosts = await _parksApiClient.GetHostsInPark(id);
+            park.Hosts = hosts.ToList();
+
+            return View(park);
+        }
+
         public IActionResult Privacy()
         {
             return View();

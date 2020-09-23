@@ -1,0 +1,37 @@
+﻿@using Delos.Westworld.Domain
+@model Delos.Westworld.Domain.Park
+
+@{
+    ViewData["Title"] = "Park";
+}
+
+<h1>@Model.Name Park</h1>
+<p>@Model.Description</p>
+
+<div class="container">
+    <div class="row">
+        @foreach (var host in Model.Hosts)
+        {
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@host.PictureUrl" alt="Host image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@host.Name</h5>
+                        <p class="card-text">@host.Biography</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b>Created</b>: @host.DateOfCreation</li>
+                        <li class="list-group-item"><b>Last review</b>: @host.LastSystemReview</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary">View Host</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

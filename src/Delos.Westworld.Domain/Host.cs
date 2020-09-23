@@ -11,5 +11,6 @@ namespace Delos.Westworld.Domain
         public string Biography { get; set; }
         public DateTime DateOfCreation { get; set; }
         public DateTime LastSystemReview { get; set; }
+        public string PictureUrl { get; set; }
     }
 }
