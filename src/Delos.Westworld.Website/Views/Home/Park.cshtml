@@ -24,7 +24,9 @@
                         <li class="list-group-item"><b>Last review</b>: @host.LastSystemReview</li>
                     </ul>
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary">View Host</a>
+                        <a class="btn btn-warning" asp-controller="Home"
+                           asp-action="Repair"
+                           asp-route-id="@host.Id">Repair Host</a>
                     </div>
                 </div>
             </div>

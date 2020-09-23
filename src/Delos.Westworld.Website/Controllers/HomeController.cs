@@ -14,12 +14,15 @@ namespace Delos.Westworld.Website.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IParksApiClient _parksApiClient;
+        private readonly IEngineeringApiClient _engineeringApiClient;
 
         public HomeController(ILogger<HomeController> logger, 
-            IParksApiClient parksApiClient)
+            IParksApiClient parksApiClient,
+            IEngineeringApiClient engineeringApiClient)
         {
             _logger = logger;
             _parksApiClient = parksApiClient;
+            _engineeringApiClient = engineeringApiClient;
         }
 
         public async Task<IActionResult> Index()
@@ -36,6 +39,13 @@ namespace Delos.Westworld.Website.Controllers
             park.Hosts = hosts.ToList();
 
             return View(park);
+        }
+
+        public async Task<IActionResult> Repair(Guid id)
+        {
+            var host = await _engineeringApiClient.RepairAndMaintenanceHost(id);
+
+            return RedirectToAction("Park", new { id = host.CurrentParkId});
         }
 
         public IActionResult Privacy()

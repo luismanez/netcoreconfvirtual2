@@ -23,7 +23,7 @@ namespace Delos.Westworld.Website.Http
 
         public async Task<Host> RepairAndMaintenanceHost(Guid id)
         {
-            var response = await _httpClient.GetAsync($"api/hostoperation/repair/{id}");
+            var response = await _httpClient.PutAsync($"api/hostoperation/repair/{id}", null);
             response.EnsureSuccessStatusCode();
 
             var host = await response.Content.ReadAs<Host>();
