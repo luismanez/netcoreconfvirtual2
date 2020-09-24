@@ -35,6 +35,7 @@ namespace Delos.Westworld.ParksApi
 
             services.AddMicrosoftIdentityWebApiAuthentication(Configuration)
                 .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddMicrosoftGraph(options => { options.Scopes = "User.Read.All Mail.Read"; })
                 .AddInMemoryTokenCaches();
 
             // Reference on How you can add custom code to some Jwt Events:
