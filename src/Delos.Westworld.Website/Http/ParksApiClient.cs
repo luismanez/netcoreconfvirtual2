@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Delos.Westworld.Domain;
 using Delos.Westworld.Infrastructure.Extensions;
+using Microsoft.Identity.Client;
 using Microsoft.Identity.Web;
 
 namespace Delos.Westworld.Website.Http
@@ -83,6 +86,9 @@ namespace Delos.Westworld.Website.Http
             await SetBearerTokenForParksApi();
 
             var response = await _httpClient.GetAsync($"api/hosts/{id}/repair");
+
+            await CheckMultifactorAuthenticationRequiredByConditionalAccessPolicy(response);
+
             response.EnsureSuccessStatusCode();
 
             var host = await response.Content.ReadAs<Host>();
@@ -95,6 +101,21 @@ namespace Delos.Westworld.Website.Http
             var token = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { "api://42146f37-5fe8-4734-9673-b4e07344f597/.default" });
             _httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", token);
+        }
+
+        private static async Task CheckMultifactorAuthenticationRequiredByConditionalAccessPolicy(HttpResponseMessage response)
+        {
+            if (response.StatusCode == HttpStatusCode.Forbidden)
+            {
+                var claims = await response.Content.ReadAsStringAsync();
+                throw new MsalUiRequiredException("MFA_Required", claims);
+            }
+        }
+
+        private static string GetParameter(IEnumerable<string> parameters, string parameterName)
+        {
+            var offset = parameterName.Length + 1;
+            return parameters.FirstOrDefault(p => p.StartsWith($"{parameterName}="))?.Substring(offset)?.Trim('"');
         }
     }
 }

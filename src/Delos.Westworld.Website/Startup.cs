@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Delos.Westworld.Website.Http;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,8 +47,30 @@ namespace Delos.Westworld.Website
             });
 
             services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
-                .EnableTokenAcquisitionToCallDownstreamApi()
+                .EnableTokenAcquisitionToCallDownstreamApi(new[] { "api://42146f37-5fe8-4734-9673-b4e07344f597/.default" })
                 .AddInMemoryTokenCaches();
+
+            services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
+            {
+                // Handling OnRedirectToIdentityProvider to ensure we add the extra Properties to the request
+                var onRedirectToIdentityProviderCurrentHandler = options.Events.OnRedirectToIdentityProvider;
+                options.Events.OnRedirectToIdentityProvider = async context =>
+                {
+                    // Required for dealing with some scenarios with MFA and Conditional Access
+                    // if the API raises an MSAL issue related with MFA and CA, the front end web app
+                    // raises a new Challenge. This new Challenge has to add the "claims" parameter returned by MSAL exception
+                    // but when is added to the OpenIdConnectChallengeProperties (or the generic AuthenticationProperties class) for calling the Challenge method
+                    // the property is not added in the actual request to Azure AD, unless we handle the OnRedirectToIdentityProvider
+                    // and add the Parameter to the ProtocolMessage
+                    foreach (var propertiesParameter in context.Properties.Parameters)
+                    {
+                        context.ProtocolMessage.SetParameter(propertiesParameter.Key,
+                            propertiesParameter.Value.ToString());
+                    }
+
+                    await onRedirectToIdentityProviderCurrentHandler(context);
+                };
+            });
 
             services.AddControllersWithViews(options =>
             {

@@ -7,6 +7,8 @@ using Delos.Westworld.Website.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Delos.Westworld.Website.Models;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Identity.Client;
 
 namespace Delos.Westworld.Website.Controllers
 {
@@ -40,9 +42,23 @@ namespace Delos.Westworld.Website.Controllers
 
         public async Task<IActionResult> Repair(Guid id)
         {
-            var host = await _parksApiClient.RepairHost(id);
+            try
+            {
+                var host = await _parksApiClient.RepairHost(id);
 
-            return RedirectToAction("Park", new { id = host.CurrentParkId});
+                return RedirectToAction("Park", new { id = host.CurrentParkId });
+            }
+            catch (MsalUiRequiredException msalUiRequiredException)
+            {
+                var properties = new OpenIdConnectChallengeProperties
+                {
+                    RedirectUri = "https://localhost:44343"
+                };
+
+                properties.SetParameter("claims", msalUiRequiredException.Message);
+
+                return Challenge(properties);
+            }
         }
 
         public IActionResult Privacy()

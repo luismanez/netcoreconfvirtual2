@@ -2,9 +2,13 @@
 using System.Threading.Tasks;
 using Delos.Westworld.Domain.Repositories;
 using Delos.Westworld.ParksApi.Http;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Client;
+using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.Resource;
 
 namespace Delos.Westworld.ParksApi.Controllers
@@ -55,9 +59,32 @@ namespace Delos.Westworld.ParksApi.Controllers
 
             // 2nd hoop from a Secured AAD Api to another secured AAD Api
             // If 2nd API requires Multifactor, and 1st not, it will cause an issue
-            var host = await _engineeringApiClient.RepairAndMaintenanceHost(id);
+            try
+            {
+                var host = await _engineeringApiClient.RepairAndMaintenanceHost(id);
 
-            return Ok(host);
+                return Ok(host);
+            }
+            catch (MicrosoftIdentityWebChallengeUserException ex)
+            {
+                await HttpContext.Response.WriteAsync(ex.MsalUiRequiredException.Claims);
+                return Forbid();
+            }
+            catch (MsalUiRequiredException ex)
+            {
+                await HttpContext.Response.WriteAsync(ex.Claims);
+                return Forbid();
+            }
+        }
+
+        private OpenIdConnectChallengeProperties PrepareForbidResponseWithClaims(string claims)
+        {
+            var properties = new OpenIdConnectChallengeProperties
+            {
+                RedirectUri = "https://localhost:44343"
+            };
+            properties.SetParameter("claims", claims);
+            return properties;
         }
     }
 }
