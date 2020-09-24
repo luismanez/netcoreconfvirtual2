@@ -31,7 +31,7 @@ namespace Delos.Westworld.EngineeringApi
         {
             services.AddPersistence(Configuration.GetConnectionString("WestworldDbContext"));
 
-            services.AddMicrosoftIdentityWebAppAuthentication(Configuration);
+            services.AddMicrosoftIdentityWebApiAuthentication(Configuration);
 
             services.AddScoped<IHostOperationRepository, HostOperationRepository>();
 
@@ -50,6 +50,7 @@ namespace Delos.Westworld.EngineeringApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

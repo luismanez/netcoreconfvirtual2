@@ -18,7 +18,7 @@ namespace Delos.Westworld.ParksApi.Controllers
         private readonly IHostRepository _hostRepository;
         private readonly IEngineeringApiClient _engineeringApiClient;
 
-        private static readonly string[] ScopeRequiredByApi = { "api://42146f37-5fe8-4734-9673-b4e07344f597/Parks.FullControl" };
+        private static readonly string[] ScopeRequiredByApi = { "Parks.FullControl" };
 
         public HostsController(ILogger<HostsController> logger,
             IHostRepository hostRepository,

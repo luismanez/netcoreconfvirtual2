@@ -6,6 +6,7 @@ using Delos.Westworld.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Web.Resource;
 
 namespace Delos.Westworld.EngineeringApi.Controllers
 {
@@ -16,6 +17,8 @@ namespace Delos.Westworld.EngineeringApi.Controllers
     {
         private readonly ILogger<HostOperationController> _logger;
         private readonly IHostOperationRepository _hostOperationRepository;
+
+        private static readonly string[] ScopeRequiredByApi = { "Engineering.FullControl" };
 
         public HostOperationController(ILogger<HostOperationController> logger,
             IHostOperationRepository hostOperationRepository)
@@ -28,6 +31,8 @@ namespace Delos.Westworld.EngineeringApi.Controllers
         public async Task<IActionResult> Repair(Guid id)
         {
             _logger.LogDebug($"Repairing Host: {id} ...");
+
+            HttpContext.VerifyUserHasAnyAcceptedScope(ScopeRequiredByApi);
 
             var host = await _hostOperationRepository.MaintenanceAndRepair(id);
 
